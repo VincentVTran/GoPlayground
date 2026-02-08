@@ -6,7 +6,7 @@ import (
 )
 
 func DemoChannel() {
-	ch := make(chan int)
+	ch := make(chan int, 1) // Create a channel of type int with a buffer size of 1 (optional, can be unbuffered)
 	// Run the goroutine and pass the channel
 	go uploadChannel(ch)
 

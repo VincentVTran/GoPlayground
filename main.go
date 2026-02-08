@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, Go.")
+	fmt.Println("Running channel demo...")
 	thread.DemoChannel()
-	thread.DemoSignals()
+	fmt.Println("Running mutex demo...")
+	thread.DemoMutex()
+	fmt.Println("Running semaphore demo...")
+	thread.DemoSemaphore()
 }
