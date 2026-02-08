@@ -15,11 +15,11 @@ Condition = A wrapper around a mutex that allows threads to sleep/signal other g
 */
 func DemoMutex() {
 	value := 0
-	mu := &sync.Mutex{}
-	cond := sync.NewCond(mu) // Conditions wait needs to release lock to allow for other goroutines to run, so it needs a mutex to manage access to the shared resource
+	mu := sync.Mutex{}
+	cond := sync.NewCond(&mu) // Conditions wait needs to release lock to allow for other goroutines to run, so it needs a mutex to manage access to the shared resource
 	ready := false
 
-	go uploadSignal(&value, mu, cond, &ready) // &value - takes the address
+	go uploadSignal(&value, &mu, cond, &ready) // &value - takes the address
 
 	mu.Lock() // If grabs first, the cond.Wait will release lock and wait for signal
 	for !ready {
