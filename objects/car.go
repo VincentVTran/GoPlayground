@@ -2,11 +2,16 @@ package objects
 
 import "fmt"
 
+type CarAction interface {
+	changeTires() bool
+}
+
 // Car represents a car with basic attributes.
 type Car struct {
-	Make  string `json:"make"`  // The manufacturer of the car
-	Model string `json:"model"` // The model of the car
-	Year  int    `json:"year"`  // The manufacturing year of the car
+	Make      string `json:"make"`       // The manufacturer of the car
+	Model     string `json:"model"`      // The model of the car
+	Year      int    `json:"year"`       // The manufacturing year of the car
+	IsCurrent bool   `json:"is_current"` // Indicates if the car is currently in use
 }
 
 // NewCar creates a new Car instance.

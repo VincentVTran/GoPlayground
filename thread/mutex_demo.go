@@ -13,6 +13,10 @@ the first goroutine calls mu.Unlock().
 
 Condition = A wrapper around a mutex that allows threads to sleep/signal other go routines
 */
+var ()
+
+const ()
+
 func DemoMutex() {
 	value := 0
 	mu := sync.Mutex{}

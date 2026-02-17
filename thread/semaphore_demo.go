@@ -21,17 +21,17 @@ func DemoSemaphore() {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
-			acquire(sem)
+			sem.acquire()
 			// Simulate work with the acquired resource
 			time.Sleep(4 * time.Second)
 			fmt.Println("Goroutine", id, "finished processing")
-			release(sem)
+			sem.release()
 		}(i)
 	}
 	wg.Wait()
 }
 
-func acquire(sem *semaphore) {
+func (sem *semaphore) acquire() {
 	sem.mu.Lock()
 	for sem.available <= 0 {
 		sem.cond.Wait() // Wait for the signal that a resource is available, once signaled receives lock again to continue locked code
@@ -40,7 +40,7 @@ func acquire(sem *semaphore) {
 	sem.mu.Unlock()
 }
 
-func release(sem *semaphore) {
+func (sem *semaphore) release() {
 	sem.mu.Lock()
 	sem.available++
 	sem.cond.Signal() // Signal one waiting goroutine that a resource is available (if there are none waiting, the signal is lost)

@@ -23,5 +23,10 @@ func DemoArrays() {
 	arrList := []int{1}
 	arrList = append(arrList, 6) // Add an element to the array list
 	arrList = append(arrList, 8)
+	arrList = removeIndex(arrList, 1) // Remove the element at index 1 (value 6)
 	fmt.Println(arrList)
+}
+
+func removeIndex(s []int, index int) []int {
+	return append(s[:index], s[index+1:]...)
 }
